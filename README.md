@@ -17,3 +17,11 @@ This is the final project of the AltSchool Data Science Track.
     ├── server
     └── utils
 ```
+
+## Goals
+
+- [ ] Data Preprocessing and EDA (finding patterns, trends)
+- [ ] Data cleaning (Removing items with zero sales from the Sales Dataset)
+- [ ] Modelling
+- [ ] User Interface
+- [ ] Flask server
