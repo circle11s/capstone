@@ -1,9 +1,11 @@
 {
-  "name": "capstone",
+  "name": "@c11s/capstone",
   "version": "0.0.1",
   "description": "Final project for AltSchool Circle 11s",
   "scripts": {
-    "server": "source venv/bin/activate && python -m flask --app src/server.py run --host=0.0.0.0 --port=5001"
+    "dev:server": "source venv/bin/activate && python -m flask --app src/server.py run --host=0.0.0.0 --port=5001",
+    "dev:win-server": "venv\\Scripts\\activate.bat && python -m flask --app src/server.py run --host=0.0.0.0 --port=5001",
+    "dev:client": "npm run dev --workspace @c11s/capstone.client"
   },
   "repository": {
     "type": "git",
@@ -12,6 +14,9 @@
   "keywords": [
     "python",
     "data"
+  ],
+  "workspaces": [
+    "./client"
   ],
   "author": "",
   "license": "ISC",
