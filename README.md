@@ -35,7 +35,8 @@ _Server Setup_
 
 - Install [Python 3](https://www.python.org/downloads/)
 - Create a virtual environment using `python3 -m venv venv`
-- Activate the virtual environment using `source venv/bin/activate`
+- If you're on Linux or MacOs, activate the virtual environment using `source venv/bin/activate`
+- If you're on Windows, activate the virtual environment using `venv\Scripts\activate.bat`
 - Install requirements using `pip install -r requirements.txt`
 
 _Client Setup_
@@ -45,8 +46,8 @@ _Client Setup_
 
 ## Running locally
 
-- Start the server on _Linux_ or _MacOS_ using `npm run dev:win-server`
-- On _Windows_ use `npm run dev:win-server` to start the server
+- If you're on _Linux_ or _MacOS_, start the server using `npm run dev:win-server`
+- If youre on _Windows_, use `npm run dev:win-server` to start the server
 - In another terminal run the client using `npm run dev:client`
 
 Client will be available at [http://localhost:3000](http://localhost:3000)
