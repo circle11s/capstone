@@ -48,3 +48,6 @@ _Client Setup_
 - Start the server on _Linux_ or _MacOS_ using `npm run dev:win-server`
 - On _Windows_ use `npm run dev:win-server` to start the server
 - In another terminal run the client using `npm run dev:client`
+
+Client will be available at [http://localhost:3000](http://localhost:3000)
+Server will be available at [http://localhost:5001](http://localhost:5001)
