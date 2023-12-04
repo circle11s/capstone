@@ -3,6 +3,7 @@ import util
 
 app = Flask(__name__)
 
+
 @app.route('/predict_sales', methods=['POST'])
 def predict_sales():
     # Assuming the ARIMA model needs a start and end date for prediction
@@ -15,6 +16,7 @@ def predict_sales():
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
+
 
 @app.route('/')
 def welcome():
