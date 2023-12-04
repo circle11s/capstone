@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "Final project for AltSchool Circle 11s",
   "scripts": {
-    "dev:server": "source venv/bin/activate && python -m flask --app src/server.py run --host=0.0.0.0 --port=5001",
-    "dev:win-server": "venv\\Scripts\\activate.bat && python -m flask --app src/server.py run --host=0.0.0.0 --port=5001",
-    "dev:client": "cd client && npm run dev"
+    "dev:server": "source venv/bin/activate && python -m flask --app server.py run --host=0.0.0.0 --port=5001",
+    "dev:win-server": "venv\\Scripts\\activate.bat && python -m flask --app server.py run --host=0.0.0.0 --port=5001",
+    "dev:client": "cd client && npm run dev",
+    "test": "source venv/bin/activate && python util.py"
   },
   "repository": {
     "type": "git",
