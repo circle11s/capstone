@@ -3,12 +3,37 @@ import React from "react";
 import { DatePicker } from "antd";
 import { PriceChart } from "./PriceChart";
 import dayjs from "dayjs";
+import useSWR from "swr";
 
 const { RangePicker } = DatePicker;
 
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://osarogie.pythonanywhere.com"
+    : "http://localhost:5001";
+
 export function Forecast() {
   const [value, setValue] = React.useState(
-    () => [dayjs(), dayjs().add(1, "month")] as any
+    () => [dayjs("2017-08-27"), dayjs("2017-09-27")] as any
+  );
+  const startDate = value[0].format("YYYY-MM-DD");
+  const endDate = value[1].format("YYYY-MM-DD");
+  const { data, isLoading } = useSWR(
+    `${BASE_URL}/predict_sales?start_date=${startDate}&end_date=${endDate}`,
+    fetcher
+  );
+  const forecast = [
+    {
+      id: "forecast",
+      color: "hsl(34, 70%, 50%)",
+      data: data?.sales_forecast || [],
+    },
+  ];
+
+  console.log(
+    `http://localhost:5001/predict_sales?start_date=${startDate}&end_date=${endDate}`,
+    data
   );
 
   return (
@@ -19,8 +44,8 @@ export function Forecast() {
         value={value}
         onChange={setValue}
       />
-      <div className="h-96 w-full">
-        <PriceChart data={list} />
+      <div className="h-96 w-full min-w-[800px]">
+        <PriceChart data={forecast} />
       </div>
     </>
   );
