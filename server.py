@@ -11,8 +11,7 @@ def predict_sales():
     start_date = request.args.get("start_date")
     end_date = request.args.get("end_date")
 
-    prediction, confint = util.predict_sales(start_date, end_date)
-    confint = confint.tolist()
+    prediction = util.predict_sales(start_date, end_date)
     forcase_list = pd.DataFrame(
         {
             "x": prediction.index.strftime("%Y-%m-%d"),
@@ -20,7 +19,7 @@ def predict_sales():
         }
     ).to_dict("records")
 
-    response = jsonify({"sales_forecast": forcase_list, "confidence_interval": confint})
+    response = jsonify({"sales_forecast": forcase_list})
     response.headers.add("Access-Control-Allow-Origin", "*")
 
     return response

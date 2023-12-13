@@ -13,18 +13,16 @@ def predict_sales(start_date, end_date):
     end_date = datetime.strptime(end_date, "%Y-%m-%d")
 
     # Calculate the number of steps for the forecast
-    number_of_steps = (end_date - __last_train_date).days
-    # number_of_steps = 62
+    # number_of_steps = (end_date - __last_train_date).days
+    number_of_steps = 61
 
-    if number_of_steps <= 0:
-        raise ValueError("End date must be after the last date in the training data")
+    # if number_of_steps <= 0:
+    #     raise ValueError("End date must be after the last date in the training data")
 
     # Make prediction using the pmdarima model
-    prediction, confint = __model.predict(
-        n_periods=number_of_steps, return_conf_int=True
-    )
+    prediction = __model.predict(steps=number_of_steps)
 
-    return prediction, confint
+    return prediction
 
 
 def load_saved_artifacts():
@@ -32,7 +30,7 @@ def load_saved_artifacts():
     global __model
     global __last_train_date
     if __model is None:
-        with open("./artifacts/sales_forecast_model.pickle", "rb") as f:
+        with open("./artifacts/forecaster_model.pickle", "rb") as f:
             __model = pickle.load(f)
 
         endog = pd.read_csv(
@@ -48,6 +46,5 @@ def load_saved_artifacts():
 
 if __name__ == "__main__":
     load_saved_artifacts()
-    # print(__model.arima_res_.data.endog)
     # Example usage
     print(predict_sales("2017-08-27", "2017-09-10"))
