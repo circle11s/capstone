@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { DatePicker } from "antd";
 import { PriceChart } from "./PriceChart";
 import dayjs from "dayjs";
 import useSWR from "swr";
+import weeklySalesData from "./data/weekly_sales_data.json";
 
 const { RangePicker } = DatePicker;
 
@@ -23,17 +24,20 @@ export function Forecast() {
     `${BASE_URL}/predict_sales?start_date=${startDate}&end_date=${endDate}`,
     fetcher
   );
-  const forecast = [
-    {
-      id: "forecast",
-      color: "hsl(34, 70%, 50%)",
-      data: data?.sales_forecast || [],
-    },
-  ];
-
-  console.log(
-    `http://localhost:5001/predict_sales?start_date=${startDate}&end_date=${endDate}`,
-    data
+  const plot = useMemo(
+    () => [
+      {
+        id: "historical",
+        color: "hsl(34, 70%, 50%)",
+        data: weeklySalesData,
+      },
+      {
+        id: "forecasted",
+        color: "hsl(34, 70%, 50%)",
+        data: data?.sales_forecast || [],
+      },
+    ],
+    [data]
   );
 
   return (
@@ -44,66 +48,15 @@ export function Forecast() {
         value={value}
         onChange={setValue}
       />
-      <div className="h-96 w-full min-w-[800px]">
-        <PriceChart data={forecast} />
+      <div className="h-96 w-full min-w-[300px]">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-600"></div>
+          </div>
+        ) : (
+          <PriceChart data={plot} />
+        )}
       </div>
     </>
   );
 }
-
-const list = [
-  {
-    id: "prices",
-    color: "hsl(34, 70%, 50%)",
-    data: [
-      {
-        x: "1",
-        y: 128,
-      },
-      {
-        x: "2",
-        y: 253,
-      },
-      {
-        x: "3",
-        y: 153,
-      },
-      {
-        x: "4",
-        y: 196,
-      },
-      {
-        x: "5",
-        y: 123,
-      },
-      {
-        x: "6",
-        y: 10,
-      },
-      {
-        x: "7",
-        y: 54,
-      },
-      {
-        x: "8",
-        y: 24,
-      },
-      {
-        x: "9",
-        y: 264,
-      },
-      {
-        x: "10",
-        y: 117,
-      },
-      {
-        x: "11",
-        y: 240,
-      },
-      {
-        x: "12",
-        y: 40,
-      },
-    ],
-  },
-];

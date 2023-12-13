@@ -1,4 +1,3 @@
-import { Footer } from "antd/es/layout/layout";
 import { Forecast } from "./Forecast";
 
 export default function Home() {

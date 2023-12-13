@@ -10,7 +10,7 @@ export const PriceChart = ({ data }: Props) => (
   <ResponsiveLine
     data={data}
     theme={theme}
-    // margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
     // xScale={{ type: "point" }}
     yScale={{
       type: "linear",
@@ -21,8 +21,8 @@ export const PriceChart = ({ data }: Props) => (
     }}
     curve="monotoneX"
     // yFormat=" >-.2f"
-    // axisTop={null}
-    // axisRight={null}
+    axisTop={null}
+    axisRight={null}
     axisBottom={{
       format: "%b %d, %y",
       // tickSize: 5,
@@ -48,12 +48,12 @@ export const PriceChart = ({ data }: Props) => (
     pointLabelYOffset={-12}
     useMesh={true}
     // enablePointLabel
-    margin={{
-      bottom: 60,
-      left: 80,
-      right: 20,
-      top: 20,
-    }}
+    // margin={{
+    //   bottom: 60,
+    //   left: 80,
+    //   right: 20,
+    //   top: 20,
+    // }}
     pointBorderColor={{
       from: "color",
       modifiers: [["darker", 0.3]],
@@ -67,6 +67,32 @@ export const PriceChart = ({ data }: Props) => (
       type: "time",
       useUTC: false,
     }}
+    legends={[
+      {
+        anchor: "bottom-right",
+        direction: "column",
+        justify: false,
+        translateX: 100,
+        translateY: 0,
+        itemsSpacing: 0,
+        itemDirection: "left-to-right",
+        itemWidth: 80,
+        itemHeight: 20,
+        itemOpacity: 0.75,
+        symbolSize: 12,
+        symbolShape: "circle",
+        symbolBorderColor: "rgba(255, 255, 255, .5)",
+        effects: [
+          {
+            on: "hover",
+            style: {
+              itemBackground: "rgba(255, 255, 255, .03)",
+              itemOpacity: 1,
+            },
+          },
+        ],
+      },
+    ]}
   />
 );
 
@@ -89,7 +115,7 @@ const theme: Theme = {
     },
     ticks: {
       text: {
-        accentColor: "#000",
+        accentColor: "#fff",
         fill: "#fff",
       },
       line: {
@@ -114,5 +140,8 @@ const theme: Theme = {
   },
   annotations: {
     text: { color: "#000" },
+  },
+  legends: {
+    text: { fill: "#fff" },
   },
 };
